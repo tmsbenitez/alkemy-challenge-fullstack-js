@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import './App.css'
+import axiosClient from './config/axios.js'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [movements, setMovements] = useState([])
+	const [call, setCall] = useState(true)
+
+	// Call API
+	const callAPI = () => {
+		if (call) {
+			axiosClient
+				.get('/movements')
+				.then(res => setMovements(res.data))
+				.catch(error => console.error(error))
+
+			setCall(false)
+		}
+	}
+
+	useEffect(() => {
+		callAPI()
+	})
+
+	return (
+		<div className="App">
+			{movements.map(move => {
+				const { id, concept, amount, date, type } = move
+
+				return (
+					<div key={id}>
+						<p>${amount}</p>
+						<p>{concept}</p>
+						<p>{date}</p>
+						<p>{type}</p>
+					</div>
+				)
+			})}
+		</div>
+	)
 }
 
-export default App;
+export default App
