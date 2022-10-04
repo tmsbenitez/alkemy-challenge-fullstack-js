@@ -1,5 +1,6 @@
 import express from 'express'
 import router from './routes/index.js'
+import auth from './routes/auth.js'
 import cors from 'cors'
 import db from './database/db.js'
 
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/', router)
+app.use('/', auth)
 
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`)

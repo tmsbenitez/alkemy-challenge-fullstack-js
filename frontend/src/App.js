@@ -1,42 +1,64 @@
 import React, { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import axiosClient from './config/axios.js'
 
-function App() {
+// Pages
+import Login from './pages/Login'
+import SignIn from './pages/SignIn'
+import New from './pages/New.js'
+import Home from './pages/Home.js'
+import Edit from './pages/Edit'
+
+const App = () => {
+	// App State
 	const [movements, setMovements] = useState([])
 	const [call, setCall] = useState(true)
+	const [budget, setBudget] = useState(0)
 
-	// Call API
-	const callAPI = () => {
-		if (call) {
-			axiosClient
-				.get('/movements')
-				.then(res => setMovements(res.data))
-				.catch(error => console.error(error))
-
-			setCall(false)
-		}
+	// Get total budget
+	const getBudget = () => {
+		const total = movements.reduce(
+			(sum, value) =>
+				Number(value.amount) && value.type === 'Income'
+					? sum + value.amount
+					: sum - value.amount,
+			0
+		)
+		setBudget(total)
 	}
 
+	// Call API
 	useEffect(() => {
-		callAPI()
+		if (call) {
+			const callAPI = () => {
+				axiosClient
+					.get('/movements')
+					.then(res => setMovements(res.data))
+					.catch(error => console.error(error))
+
+				setCall(false)
+			}
+
+			callAPI()
+		}
+		getBudget()
 	})
 
 	return (
-		<div className="App">
-			{movements.map(move => {
-				const { id, concept, amount, date, type } = move
-
-				return (
-					<div key={id}>
-						<p>${amount}</p>
-						<p>{concept}</p>
-						<p>{date}</p>
-						<p>{type}</p>
-					</div>
-				)
-			})}
-		</div>
+		<Routes>
+			<Route
+				exact
+				path="/"
+				element={
+					<Home movements={movements} budget={budget} setCall={setCall} />
+				}
+			/>
+			<Route exact path='/login' element={<Login />} />
+			<Route exact path='/signin' element={<SignIn />} />
+			<Route exact path="/new" element={<New setCall={setCall} />} />
+			<Route exact path="/movements/:id" element={<Edit setCall={setCall} />} />
+		</Routes>
 	)
 }
 
