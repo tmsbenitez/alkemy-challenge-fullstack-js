@@ -1,8 +1,12 @@
 import { Movement } from '../models/Movement.js'
+import jwt from 'jsonwebtoken'
 
 export const saveMovement = async (req, res, next) => {
 	try {
-		await Movement.create(req.body)
+		const { concept, amount, date, type, userId } = req.body
+
+		await Movement.create({ concept, amount, date, type, userId })
+
 		res.json({ message: 'Added successfully' })
 	} catch (error) {
 		console.error(error)
@@ -22,7 +26,8 @@ export const getAllMovements = async (req, res, next) => {
 
 export const getOneMovement = async (req, res, next) => {
 	try {
-		const movement = await Movement.findByPk(req.params.id)
+		const { id } = req.params
+		const movement = await Movement.findByPk(id)
 		res.json(movement)
 	} catch (error) {
 		console.error(error)
@@ -33,9 +38,10 @@ export const getOneMovement = async (req, res, next) => {
 export const editMovement = async (req, res, next) => {
 	try {
 		const { concept, amount } = req.body
-		await Movement.update({ concept, amount }, { where: { id: req.params.id } })
+		const { id } = req.params
+		await Movement.update({ concept, amount }, { where: { id } })
 
-		const movement = await Movement.findByPk(req.params.id)
+		const movement = await Movement.findByPk(id)
 		res.json(movement)
 	} catch (error) {
 		console.error(error)
@@ -45,7 +51,8 @@ export const editMovement = async (req, res, next) => {
 
 export const deleteMovement = async (req, res, next) => {
 	try {
-		await Movement.destroy({ where: { id: req.params.id } })
+		const { id } = req.params
+		await Movement.destroy({ where: { id } })
 		res.json({ message: 'Movement deleted successfully' })
 	} catch (error) {
 		console.error(error)

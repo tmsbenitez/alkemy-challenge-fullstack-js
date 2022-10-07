@@ -39,7 +39,7 @@ const Edit = props => {
 			}
 			callAPI()
 		}
-	}, [movement])
+	})
 
 	// Form read
 	const refreshState = event => {
@@ -112,7 +112,7 @@ const Edit = props => {
 	]
 
 	return (
-		<div className="flex">
+		<div className="flex w-full">
 			<Sidebar />
 			<div className="flex flex-col gap-4 m-10 font-cabin">
 				<h2 className="text-xl font-bold">Edit movement</h2>

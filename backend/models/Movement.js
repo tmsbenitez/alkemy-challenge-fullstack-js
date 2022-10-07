@@ -9,9 +9,12 @@ export const Movement = db.define('movements', {
 		type: Sequelize.BIGINT,
 	},
 	date: {
-		type: Sequelize.DATE,
+		type: Sequelize.DATEONLY,
 	},
 	type: {
 		type: Sequelize.STRING,
+	},
+	userId: {
+		type: Sequelize.BIGINT,
 	},
 })

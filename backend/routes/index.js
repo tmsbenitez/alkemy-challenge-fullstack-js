@@ -9,10 +9,6 @@ import {
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-	res.send('<a href="/movements">Go to API data</a>')
-})
-
 // Add movement on Database
 router.post('/movements', saveMovement)
 

@@ -54,7 +54,7 @@ egreso) una vez creada.
 
 De forma adicional, puede
 
-### Autentación de usuarios
+### Autenticación de usuarios
 
 Agregar un formulario de registro y login para permitir identificar al usuario que utiliza la
 aplicación, y vincular las operaciones registradas al usuario autenticado en el sistema,

@@ -1,15 +1,15 @@
 import { Router } from 'express'
-import { getAllUsers, signup, signin } from '../controllers/authController.js'
+import { createAccount, login, getAllUsers } from '../controllers/authController.js'
 
 const router = Router()
 
+// Create account
+router.post('/api/create', createAccount)
+
+// Log In
+router.post('/', login)
+
 // Get all users
-router.get('/api/signup', getAllUsers)
-
-// Create a new user
-router.post('/api/signup', signup)
-
-// Sign In
-router.post('/api/signin', signin)
+router.get('/api/users', getAllUsers)
 
 export default router

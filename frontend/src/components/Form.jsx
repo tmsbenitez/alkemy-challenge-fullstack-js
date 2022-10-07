@@ -4,6 +4,9 @@ import axiosClient from '../config/axios.js'
 const Form = props => {
 	// Destructure props
 	const { setCall } = props
+	
+	// User id from the Local Storage
+	const { id } = JSON.parse(window.localStorage.getItem('LoggedUser'))
 
 	// Create state as an object
 	const [movement, setMovement] = useState({
@@ -11,6 +14,7 @@ const Form = props => {
 		amount: '',
 		date: '',
 		type: 'Income',
+		userId: id,
 	})
 
 	// Verify error
@@ -20,23 +24,19 @@ const Form = props => {
 	const [success, setSuccess] = useState(false)
 
 	// Form read
-	const refreshState = event => {
+	const refreshState = ({ target }) => {
 		setMovement({
 			...movement,
-			[event.target.name]: event.target.value,
+			[target.name]: target.value,
 		})
 	}
 
 	// Send request to API
 	const createMovement = event => {
 		event.preventDefault()
+		const { concept, amount, date } = movement
 
-		if (
-			movement.concept === '' ||
-			movement.amount === '' ||
-			movement.date === '' ||
-			movement.type === ''
-		) {
+		if (concept === '' || amount === '' || date === '') {
 			setFormError(true)
 			return
 		} else {
@@ -47,17 +47,10 @@ const Form = props => {
 				.post('/movements', movement)
 				.then(res => setCall(true))
 				.catch(error => console.error(error))
-			setMovement({
-				concept: '',
-				amount: '',
-				date: '',
-				type: '',
-			})
 		}
 	}
 
 	// Inputs
-
 	const inputs = [
 		{
 			label: 'Concept',
@@ -89,20 +82,24 @@ const Form = props => {
 		<div className="flex flex-col gap-4 m-10 font-cabin">
 			<h2 className="text-xl font-bold">Add a new movement</h2>
 			<form className="flex flex-col gap-2" onSubmit={createMovement}>
-				{inputs.map(input => (
-					<div key={input.name} className="flex items-center gap-2">
-						<label className="w-full">{input.label}</label>
-						<input
-							type={input.type}
-							min={input.min}
-							className="p-1 border rounded border-neutral-900"
-							value={input.value}
-							onChange={refreshState}
-							name={input.name}
-							placeholder={input.placeholder}
-						/>
-					</div>
-				))}
+				{inputs.map(input => {
+					const { label, type, min, name, value, placeholder } = input
+
+					return (
+						<div key={name} className="flex items-center gap-2">
+							<label className="w-full">{label}</label>
+							<input
+								type={type}
+								min={min}
+								className="p-1 border rounded border-neutral-900"
+								value={value}
+								onChange={refreshState}
+								name={name}
+								placeholder={placeholder}
+							/>
+						</div>
+					)
+				})}
 				<div className="flex items-center gap-2">
 					<label className="w-full">Type</label>
 					<select className="w-full" onChange={refreshState} name="type">

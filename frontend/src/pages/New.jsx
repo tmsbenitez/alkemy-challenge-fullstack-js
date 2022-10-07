@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 // Components
 import Form from '../components/Form'
 import Sidebar from '../components/Sidebar'
@@ -9,8 +7,8 @@ const New = props => {
 	const { setCall } = props
 
 	return (
-		<div className='flex'>
-      <Sidebar />
+		<div className="flex">
+			<Sidebar />
 			<Form setCall={setCall} />
 		</div>
 	)

@@ -1,0 +1,48 @@
+import axiosClient from '../config/axios.js'
+import { useState } from 'react'
+
+// Components
+import LoginForm from '../components/LoginForm.jsx'
+
+const Login = () => {
+	// Login State
+	const [user, setUser] = useState({
+		username: '',
+		password: '',
+	})
+	const [errorMessage, setErrorMessage] = useState('')
+
+	// Refresh state
+	const refreshState = ({ target }) => {
+		setUser({
+			...user,
+			[target.name]: target.value,
+		})
+	}
+
+	// Validate user
+	const validateUser = async event => {
+		event.preventDefault()
+
+		await axiosClient
+			.post('/', user)
+			.then(res => {
+				window.localStorage.setItem('LoggedUser', JSON.stringify(res.data))
+				window.location.reload()
+			})
+			.catch(({ response }) => setErrorMessage(response.data.error))
+	}
+
+	return (
+		<main className="flex flex-col items-center justify-center h-screen">
+			<LoginForm
+				validateUser={validateUser}
+				refreshState={refreshState}
+				user={user}
+				errorMessage={errorMessage}
+			/>
+		</main>
+	)
+}
+
+export default Login
