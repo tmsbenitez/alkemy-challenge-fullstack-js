@@ -79,7 +79,7 @@ const Form = props => {
 	]
 
 	return (
-		<div className="flex flex-col gap-4 m-10 font-cabin">
+		<div className="flex flex-col gap-4 m-10 font-latoFont">
 			<h2 className="text-xl font-bold">Add a new movement</h2>
 			<form className="flex flex-col gap-2" onSubmit={createMovement}>
 				{inputs.map(input => {

@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import New from './pages/New.jsx'
 import Home from './pages/Home.jsx'
 import Edit from './pages/Edit.jsx'
+import CreateAccount from './pages/CreateAccount'
 
 const App = () => {
 	// App State
@@ -17,13 +18,15 @@ const App = () => {
 	const [call, setCall] = useState(true)
 	const [loggedUser, setLoggedUser] = useState({})
 
+	// Get item from the Local Storage
+	const loggedUserJSON = window.localStorage.getItem('LoggedUser')
+
 	useEffect(() => {
-		const loggedUserJSON = window.localStorage.getItem('LoggedUser')
 		if (loggedUserJSON) {
 			const user = JSON.parse(loggedUserJSON)
 			setLoggedUser(user)
 		}
-	}, [])
+	}, [loggedUserJSON])
 
 	useEffect(() => {
 		// Call API
@@ -45,25 +48,15 @@ const App = () => {
 		<Routes>
 			<Route
 				path="/"
-				element={
-					Object.entries(loggedUser).length !== 0 ? (
-						<Navigate replace to="/home" />
-					) : (
-						<Login />
-					)
-				}
+				element={loggedUserJSON ? <Navigate replace to="/home" /> : <Login />}
 			/>
 			<Route
 				path="/home"
-				element={
-					<Home movements={movements} setCall={setCall} />
-				}
+				element={<Home movements={movements} setCall={setCall} />}
 			/>
-			<Route
-				path="/new"
-				element={<New setCall={setCall} />}
-			/>
+			<Route path="/new" element={<New setCall={setCall} />} />
 			<Route path="/movements/:id" element={<Edit setCall={setCall} />} />
+			<Route path="/api/create" element={<CreateAccount />} />
 		</Routes>
 	)
 }

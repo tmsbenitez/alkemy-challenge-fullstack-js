@@ -114,7 +114,7 @@ const Edit = props => {
 	return (
 		<div className="flex w-full">
 			<Sidebar />
-			<div className="flex flex-col gap-4 m-10 font-cabin">
+			<div className="flex flex-col gap-4 m-10 font-latoFont">
 				<h2 className="text-xl font-bold">Edit movement</h2>
 				<form className="flex flex-col gap-2" onSubmit={editMovement}>
 					{inputs.map(input => (

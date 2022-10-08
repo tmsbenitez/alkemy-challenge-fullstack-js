@@ -14,7 +14,7 @@ const LoginForm = props => {
 	}, [errorMessage])
 
 	return (
-		<div className="flex flex-col items-center gap-2 p-10 border border-black font-cabin">
+		<div className="flex flex-col items-center gap-2 p-10 border border-black font-latoFont">
 			<h1 className="text-2xl">Log In</h1>
 			<form
 				className="flex flex-col items-center gap-2 p-4"
@@ -38,10 +38,15 @@ const LoginForm = props => {
 						value={user.password}
 					/>
 				</div>
-				<input
-					type="submit"
-					className="px-4 py-1 ml-auto border border-black"
-				/>
+				<div className="flex justify-between w-full">
+					<a href="/api/create" className="px-4 py-1 border border-black">
+						Create Account
+					</a>
+					<input
+						type="submit"
+						className="px-4 py-1 border border-black cursor-pointer"
+					/>
+				</div>
 			</form>
 			{error ? <p>{errorMessage}</p> : null}
 		</div>

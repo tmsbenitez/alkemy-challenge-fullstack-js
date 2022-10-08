@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 // Components
 import Sidebar from '../components/Sidebar.jsx'
-import Remove from '../components/Remove.jsx'
+import Movements from '../components/Movements.jsx'
 import Header from '../components/Header.jsx'
+import Budget from '../components/Budget.jsx'
 
 const Home = props => {
 	// Destructure props
@@ -30,46 +30,47 @@ const Home = props => {
 
 	// Get total budget
 	useEffect(() => {
-		const total = filteredMovements.reduce(
-			(sum, value) =>
-				Number(value.amount) && value.type === 'Income'
-					? sum + value.amount
-					: sum - value.amount,
-			0
-		)
-		setBudget(total)
+		const total = filteredMovements
+			.reduce(
+				(sum, value) =>
+					Number(value.amount) && value.type === 'Income'
+						? sum + value.amount
+						: sum - value.amount,
+				0
+			)
+			.toString()
+
+		if (total.startsWith('-')) {
+			setBudget(total.replace('-', '$-'))
+		} else {
+			setBudget('$' + total)
+		}
 	}, [filteredMovements])
 
 	return (
-		<div className="flex w-full font-cabin">
-			<Sidebar />
-			<main className='flex flex-col'>
+		<div className="flex w-full h-screen font-latoFont">
+			<main className="flex flex-col w-full m-10 gap-14">
 				<Header />
-				<div className="flex flex-col gap-4 m-10">
-					<h2 className="flex px-6 py-10 text-4xl text-white rounded bg-neutral-900">
-						Budget: ${budget}
-					</h2>
-					<div className="grid grid-cols-6 gap-4">
-						{filteredMovements.map(movement => {
-							const { id, concept, amount, date, type } = movement
-
-							return (
-								<div
-									key={id}
-									className="flex flex-col gap-1 p-2 border rounded border-neutral-900"
-								>
-									<Remove id={id} setCall={setCall} />
-									<Link to={`/movements/${id}`}>Edit</Link>
-									<p>{concept}</p>
-									<p>${amount}</p>
-									<p>{date.slice(0, 10)}</p>
-									<p>{type}</p>
-								</div>
-							)
-						})}
+				<div className="flex flex-col justify-between h-full gap-4">
+					<Budget budget={budget} />
+					<div>
+						<div className="flex items-center justify-between py-4">
+							<h2 className="text-3xl font-bold font-quicksand">Movements</h2>
+							<a
+								href="/movements"
+								className="flex items-center gap-1 p-2 px-4 text-xl font-semibold text-black duration-200 border-2 rounded-lg bg-grey border-grey font-quicksand hover:bg-white hover:text-blue-500"
+							>
+								See all
+							</a>
+						</div>
+						<Movements
+							setCall={setCall}
+							filteredMovements={filteredMovements}
+						/>
 					</div>
 				</div>
 			</main>
+			<Sidebar />
 		</div>
 	)
 }
