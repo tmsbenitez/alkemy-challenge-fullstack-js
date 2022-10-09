@@ -23,7 +23,9 @@ const Home = props => {
 				movement.userId === id ? movement : null
 			)
 
-			setFilteredMovements(filter)
+			setFilteredMovements(
+				filter.slice(filter.length - 10, filter.length).reverse()
+			)
 		}
 		filterMovements()
 	}, [movements])
@@ -48,14 +50,16 @@ const Home = props => {
 	}, [filteredMovements])
 
 	return (
-		<div className="flex w-full h-screen font-latoFont">
+		<div className="flex w-full font-latoFont">
 			<main className="flex flex-col w-full m-10 gap-14">
 				<Header />
-				<div className="flex flex-col justify-between h-full gap-4">
+				<div className="flex flex-col h-full gap-4">
 					<Budget budget={budget} />
 					<div>
 						<div className="flex items-center justify-between py-4">
-							<h2 className="text-3xl font-bold font-quicksand">Movements</h2>
+							<h2 className="text-3xl font-bold font-quicksand">
+								Last 10 movements
+							</h2>
 							<a
 								href="/movements"
 								className="flex items-center gap-1 p-2 px-4 text-xl font-semibold text-black duration-200 border-2 rounded-lg bg-grey border-grey font-quicksand hover:bg-white hover:text-blue-500"

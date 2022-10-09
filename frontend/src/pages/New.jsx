@@ -9,7 +9,7 @@ const New = props => {
 
 	return (
 		<div className="flex h-screen">
-			<div className='flex flex-col w-full m-10'>
+			<div className="flex flex-col w-full m-10">
 				<Header />
 				<Form setCall={setCall} />
 			</div>
