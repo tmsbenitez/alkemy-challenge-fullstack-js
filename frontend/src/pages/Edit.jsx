@@ -4,8 +4,13 @@ import axiosClient from '../config/axios'
 
 // Components
 import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
 
-const Edit = props => {
+// Icons
+import { WarningIcon, CheckIcon } from '../components/Design/Icons'
+import Background, { BlueCircles } from '../components/Design/Background'
+
+const Edit = ({ setCall }) => {
 	// Edit component state
 	const [movement, setMovement] = useState({
 		concept: '',
@@ -18,9 +23,6 @@ const Edit = props => {
 	const [formError, setFormError] = useState(false)
 	// Success message
 	const [success, setSuccess] = useState(false)
-
-	// Destructure props
-	const { setCall } = props
 
 	// Get URL params
 	let params = useParams()
@@ -112,34 +114,54 @@ const Edit = props => {
 	]
 
 	return (
-		<div className="flex w-full">
+		<div className="flex w-full min-h-screen">
+			<Background />
 			<Sidebar />
-			<div className="flex flex-col gap-4 m-10 font-latoFont">
-				<h2 className="text-xl font-bold">Edit movement</h2>
-				<form className="flex flex-col gap-2" onSubmit={editMovement}>
-					{inputs.map(input => (
-						<div key={input.name} className="flex items-center gap-2">
-							<label className="w-full">{input.label}</label>
-							<input
-								type={input.type}
-								min={input.min}
-								className="p-1 border rounded border-neutral-900"
-								value={input.value}
-								name={input.name}
-								disabled={input.disabled ? 'disabled' : null}
-								onChange={refreshState}
-								placeholder={input.placeholder}
-							/>
+			<div className="flex flex-col w-full gap-10 m-10">
+				<Header />
+				<h2 className="text-3xl font-bold font-quicksand">Edit movement</h2>
+				<div className="relative flex flex-col justify-center w-full gap-4 p-6 bg-white border-2 rounded-2xl font-latoFont border-grey">
+					<form className="flex flex-col gap-2 w-fit" onSubmit={editMovement}>
+						{inputs.map(
+							({ label, type, min, name, value, placeholder, disabled }) => (
+								<div key={name} className="flex flex-col gap-2 w-fit">
+									<label>{label}</label>
+									<input
+										type={type}
+										min={min}
+										className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+										value={value}
+										name={name}
+										disabled={disabled ? 'disabled' : null}
+										onChange={refreshState}
+										placeholder={placeholder}
+									/>
+								</div>
+							)
+						)}
+						<div className="flex items-center gap-6 mt-6">
+							<button
+								type="submit"
+								className="flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"
+								value="Edit"
+							>
+								Edit
+							</button>
+							{formError ? (
+								<p className="flex items-center gap-1 text-red">
+									<WarningIcon /> Please, complete the form
+								</p>
+							) : null}
+							{success ? (
+								<p className="flex items-center gap-1 text-green">
+									<CheckIcon />
+									Edited!
+								</p>
+							) : null}
 						</div>
-					))}
-					<input
-						type="submit"
-						className="flex items-center justify-center px-6 py-1 ml-auto border rounded border-neutral-900"
-						value="Edit"
-					/>
-				</form>
-				{formError ? <p>Please, complete the form</p> : null}
-				{success ? <p>Edited!</p> : null}
+					</form>
+					<BlueCircles />
+				</div>
 			</div>
 		</div>
 	)

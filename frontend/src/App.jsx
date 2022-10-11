@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import './App.css'
 import axiosClient from './config/axios.js'
 
 // Authentication
@@ -11,6 +10,7 @@ import New from './pages/New.jsx'
 import Home from './pages/Home.jsx'
 import Edit from './pages/Edit.jsx'
 import CreateAccount from './pages/CreateAccount'
+import Movements from './pages/Movements'
 
 const App = () => {
 	// App State
@@ -30,11 +30,13 @@ const App = () => {
 
 	useEffect(() => {
 		// Call API
-		if (call) {
+		if (loggedUserJSON && call) {
 			const callAPI = () => {
+				const loggedUser = JSON.parse(window.localStorage.getItem('LoggedUser'))
+
 				axiosClient
-					.get('/movements')
-					.then(res => setMovements(res.data))
+					.get('/movements', { params: { loggedUserId: loggedUser.id } })
+					.then(res => setMovements(res.data.reverse()))
 					.catch(error => console.error(error))
 
 				setCall(false)
@@ -55,6 +57,10 @@ const App = () => {
 				element={<Home movements={movements} setCall={setCall} />}
 			/>
 			<Route path="/new" element={<New setCall={setCall} />} />
+			<Route
+				path="/movements"
+				element={<Movements setCall={setCall} movements={movements} />}
+			/>
 			<Route path="/movements/:id" element={<Edit setCall={setCall} />} />
 			<Route path="/api/create" element={<CreateAccount />} />
 		</Routes>

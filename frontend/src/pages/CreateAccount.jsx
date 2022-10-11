@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 // Components
 import CreateAccountForm from '../components/CreateAccountForm.jsx'
+import Background from '../components/Design/Background.jsx'
 
 const CreateAccount = () => {
 	// Create Account State
@@ -49,6 +50,7 @@ const CreateAccount = () => {
 
 	return (
 		<main className="flex flex-col items-center justify-center h-screen">
+			<Background />
 			<CreateAccountForm
 				newUser={newUser}
 				refreshState={refreshState}

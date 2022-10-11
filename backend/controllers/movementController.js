@@ -5,6 +5,26 @@ export const saveMovement = async (req, res, next) => {
 	try {
 		const { concept, amount, date, type, userId } = req.body
 
+		const authorization = req.get('authorization')
+
+		let token = ''
+
+		if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+			token = authorization.substring(7)
+		}
+
+		let decodedToken = {}
+
+		try {
+			decodedToken = jwt.verify(token, 'pbm_secret_key')
+		} catch (error) {
+			console.error(error)
+		}
+
+		if (!token || !decodedToken.id) {
+			return res.status(401).json({ error: 'token missing or invalid' })
+		}
+
 		await Movement.create({ concept, amount, date, type, userId })
 
 		res.json({ message: 'Added successfully' })
@@ -16,7 +36,8 @@ export const saveMovement = async (req, res, next) => {
 
 export const getAllMovements = async (req, res, next) => {
 	try {
-		const movements = await Movement.findAll()
+		const { loggedUserId } = req.query
+		const movements = await Movement.findAll({ where: { userId: loggedUserId } })
 		res.json(movements)
 	} catch (error) {
 		console.error(error)

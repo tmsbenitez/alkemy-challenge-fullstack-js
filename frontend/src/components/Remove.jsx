@@ -1,11 +1,8 @@
 import axiosClient from '../config/axios'
 
-import { TrashIcon } from './Icons.jsx'
+import { TrashIcon } from './Design/Icons.jsx'
 
-const Remove = props => {
-	// Destructure props
-	const { id, setCall } = props
-
+const Remove = ({ id, setCall }) => {
 	const removeMovement = () => {
 		axiosClient
 			.delete(`/movements/${id}`)

@@ -1,24 +1,22 @@
-
-
-const UserInfo = props => {
-	const { logout, loggedUser } = props
-
+const UserInfo = ({ logout, loggedUser }) => {
 	return (
-		<div className="absolute z-50 flex flex-col items-center w-56 bg-white border shadow-md h-fit -right-2 top-10 border-grey rounded-xl">
+		<div className="absolute z-50 flex flex-col items-center bg-white border shadow-md w-fit h-fit -right-2 top-10 border-grey rounded-xl">
 			<div className="flex flex-col items-center gap-2">
-				<div className="relative flex items-center justify-center group-hover:opacity-10">
+				<div className="relative flex items-center justify-center w-56 group-hover:opacity-10">
 					<img
 						src={
 							'https://icons.veryicon.com/png/o/miscellaneous/two-color-webpage-small-icon/user-244.png'
 						}
 						alt="user"
-						className="object-cover w-56"
+						className="object-cover"
 					/>
 				</div>
-				<p className="text-xl font-semibold font-quicksand">
-					{loggedUser.name}
-				</p>
-				<p className="text-md">{loggedUser.email}</p>
+				<div className="flex flex-col items-center w-full gap-2 px-6">
+					<p className="text-xl font-semibold font-quicksand">
+						{loggedUser.name}
+					</p>
+					<p className="text-md">{loggedUser.email}</p>
+				</div>
 			</div>
 			<button
 				onClick={logout}

@@ -1,7 +1,9 @@
 import axiosClient from '../config/axios.js'
 import { useState } from 'react'
 
+
 // Components
+import Background from '../components/Design/Background.jsx'
 import LoginForm from '../components/LoginForm.jsx'
 
 const Login = () => {
@@ -34,7 +36,8 @@ const Login = () => {
 	}
 
 	return (
-		<main className="flex flex-col items-center justify-center h-screen">
+		<main className="relative flex flex-col items-center justify-center h-screen">
+			<Background />
 			<LoginForm
 				validateUser={validateUser}
 				refreshState={refreshState}

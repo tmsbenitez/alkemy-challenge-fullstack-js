@@ -2,37 +2,31 @@ import { useState, useEffect } from 'react'
 
 // Components
 import Sidebar from '../components/Sidebar.jsx'
-import Movements from '../components/Movements.jsx'
+import Movement from '../components/Movement.jsx'
 import Header from '../components/Header.jsx'
+import Placeholder from '../components/Placeholder.jsx'
 import Budget from '../components/Budget.jsx'
+import Background from '../components/Design/Background.jsx'
 
-const Home = props => {
-	// Destructure props
-	const { movements, setCall } = props
-
+const Home = ({ movements, setCall }) => {
 	// Home State
 	const [budget, setBudget] = useState(0)
-	const [filteredMovements, setFilteredMovements] = useState([])
+	const [slicedMovements, setSlicedMovements] = useState([])
 
-	// Filter movements
+	// Slice movements
 	useEffect(() => {
-		const filterMovements = () => {
-			const { id } = JSON.parse(window.localStorage.getItem('LoggedUser'))
-
-			const filter = movements.filter(movement =>
-				movement.userId === id ? movement : null
+		if (movements.length >= 10) {
+			setSlicedMovements(
+				movements.slice(movements.length - 10, movements.length)
 			)
-
-			setFilteredMovements(
-				filter.slice(filter.length - 10, filter.length).reverse()
-			)
+		} else {
+			setSlicedMovements(movements.slice(0, movements.length))
 		}
-		filterMovements()
 	}, [movements])
 
 	// Get total budget
 	useEffect(() => {
-		const total = filteredMovements
+		const total = slicedMovements
 			.reduce(
 				(sum, value) =>
 					Number(value.amount) && value.type === 'Income'
@@ -47,34 +41,56 @@ const Home = props => {
 		} else {
 			setBudget('$' + total)
 		}
-	}, [filteredMovements])
+	}, [slicedMovements])
 
 	return (
-		<div className="flex w-full font-latoFont">
-			<main className="flex flex-col w-full m-10 gap-14">
+		<div className="flex w-full h-full min-h-screen font-latoFont">
+			<Background />
+			<Sidebar />
+			<main className="flex flex-col w-full gap-10 m-10">
 				<Header />
-				<div className="flex flex-col h-full gap-4">
+				<div className="flex flex-col gap-4">
 					<Budget budget={budget} />
 					<div>
 						<div className="flex items-center justify-between py-4">
 							<h2 className="text-3xl font-bold font-quicksand">
 								Last 10 movements
 							</h2>
-							<a
-								href="/movements"
-								className="flex items-center gap-1 p-2 px-4 text-xl font-semibold text-black duration-200 border-2 rounded-lg bg-grey border-grey font-quicksand hover:bg-white hover:text-blue-500"
-							>
-								See all
-							</a>
+							<div className="flex gap-2">
+								<a
+									href="/new"
+									className="flex items-center gap-1 p-2 px-4 text-xl font-semibold text-black duration-200 border-2 rounded-lg bg-grey border-grey font-quicksand hover:bg-white hover:text-blue-500"
+								>
+									Add new
+								</a>
+								<a
+									href="/movements"
+									className="flex items-center gap-1 p-2 px-4 text-xl font-semibold text-black duration-200 border-2 rounded-lg bg-grey border-grey font-quicksand hover:bg-white hover:text-blue-500"
+								>
+									See all
+								</a>
+							</div>
 						</div>
-						<Movements
-							setCall={setCall}
-							filteredMovements={filteredMovements}
-						/>
+						<div className="relative grid gap-8 2xl:grid-cols-2 justify-items-center">
+							{slicedMovements.length === 0 ? (
+								<Placeholder />
+							) : (
+								slicedMovements.map(({ id, concept, amount, date, type }) => (
+									<Movement
+										key={id}
+										id={id}
+										concept={concept}
+										amount={amount}
+										date={date}
+										type={type}
+										setCall={setCall}
+									/>
+								))
+							)}
+						</div>
 					</div>
 				</div>
 			</main>
-			<Sidebar />
 		</div>
 	)
 }
