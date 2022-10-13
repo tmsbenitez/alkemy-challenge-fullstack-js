@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { User } from '../models/User.js'
+import dotenv from 'dotenv';
+dotenv.config()
 
 export const createAccount = async (req, res, next) => {
 	try {
@@ -13,7 +15,7 @@ export const createAccount = async (req, res, next) => {
 			username,
 			name,
 			email,
-			passwordHash
+			passwordHash,
 		})
 
 		res.json(user)
@@ -25,13 +27,13 @@ export const createAccount = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
 	try {
-		const { username, password } = req.body
-		const user = await User.findOne({ where: { username } })
+		const { email, password } = req.body
+		const user = await User.findOne({ where: { email } })
 		const correctPassword =
 			user === null ? false : await bcrypt.compare(password, user.passwordHash)
 
 		if (!(user && correctPassword)) {
-			await res.status(401).json({ error: 'Invalid user or password' })
+			await res.status(401).json({ error: 'Invalid email or password' })
 		}
 
 		const userForToken = {
@@ -39,7 +41,7 @@ export const login = async (req, res, next) => {
 			username: user.username,
 		}
 
-		const token = jwt.sign(userForToken, 'pbm_secret_key', {
+		const token = jwt.sign(userForToken, process.env.SECRET_KEY, {
 			expiresIn: 60 * 60 * 24 * 7, // Expires in 1 week
 		})
 

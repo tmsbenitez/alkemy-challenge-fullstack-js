@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { EditIcon } from './Design/Icons.jsx'
+// Icons
+import { EditIcon } from './design/Icons.jsx'
 
 const Edit = ({ id }) => {
 	return (

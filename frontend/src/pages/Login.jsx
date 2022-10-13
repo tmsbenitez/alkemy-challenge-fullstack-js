@@ -3,13 +3,13 @@ import { useState } from 'react'
 
 
 // Components
-import Background from '../components/Design/Background.jsx'
+import Background from '../components/design/Background.jsx'
 import LoginForm from '../components/LoginForm.jsx'
 
 const Login = () => {
 	// Login State
 	const [user, setUser] = useState({
-		username: '',
+		email: '',
 		password: '',
 	})
 	const [errorMessage, setErrorMessage] = useState('')
@@ -36,7 +36,7 @@ const Login = () => {
 	}
 
 	return (
-		<main className="relative flex flex-col items-center justify-center h-screen">
+		<main className="relative flex flex-col items-center justify-center h-screen mb-24 lg:mb-0">
 			<Background />
 			<LoginForm
 				validateUser={validateUser}

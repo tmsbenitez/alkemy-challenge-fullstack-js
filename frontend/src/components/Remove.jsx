@@ -1,6 +1,6 @@
 import axiosClient from '../config/axios'
 
-import { TrashIcon } from './Design/Icons.jsx'
+import { TrashIcon } from './design/Icons.jsx'
 
 const Remove = ({ id, setCall }) => {
 	const removeMovement = () => {

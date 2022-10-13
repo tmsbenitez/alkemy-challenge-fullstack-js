@@ -1,9 +1,11 @@
 import { Movement } from '../models/Movement.js'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
+dotenv.config()
 
 export const saveMovement = async (req, res, next) => {
 	try {
-		const { concept, amount, date, type, userId } = req.body
+		const { concept, amount, date, type, category, userId } = req.body
 
 		const authorization = req.get('authorization')
 
@@ -16,7 +18,7 @@ export const saveMovement = async (req, res, next) => {
 		let decodedToken = {}
 
 		try {
-			decodedToken = jwt.verify(token, 'pbm_secret_key')
+			decodedToken = jwt.verify(token, process.env.SECRET_KEY)
 		} catch (error) {
 			console.error(error)
 		}
@@ -25,7 +27,7 @@ export const saveMovement = async (req, res, next) => {
 			return res.status(401).json({ error: 'token missing or invalid' })
 		}
 
-		await Movement.create({ concept, amount, date, type, userId })
+		await Movement.create({ concept, amount, date, type, category, userId })
 
 		res.json({ message: 'Added successfully' })
 	} catch (error) {

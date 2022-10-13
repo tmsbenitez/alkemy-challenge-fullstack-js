@@ -1,26 +1,22 @@
 import { useState } from 'react'
 import axiosClient from '../config/axios.js'
-import { BlueCircles } from './Design/Background.jsx'
 
-import { CheckIcon, PlusIcon, WarningIcon } from './Design/Icons.jsx'
+import { BlueCircles } from './design/Background.jsx'
+import { CheckIcon, PlusIcon, WarningIcon } from './design/Icons.jsx'
 
 const Form = ({ setCall }) => {
-	// User id from the Local Storage
+	// User from the Local Storage
 	const { id, token } = JSON.parse(window.localStorage.getItem('LoggedUser'))
 
-	// Create state as an object
 	const [movement, setMovement] = useState({
 		concept: '',
 		amount: '',
 		date: '',
 		type: 'Income',
+		category: 'No category',
 		userId: id,
 	})
-
-	// Verify error
 	const [formError, setFormError] = useState(false)
-
-	// Success message
 	const [success, setSuccess] = useState(false)
 
 	// Form read
@@ -52,7 +48,6 @@ const Form = ({ setCall }) => {
 		}
 	}
 
-	// Inputs
 	const inputs = [
 		{
 			label: 'Concept',
@@ -84,6 +79,29 @@ const Form = ({ setCall }) => {
 		},
 	]
 
+	const selects = [
+		{
+			label: 'Type',
+			name: 'type',
+			options: [{ value: 'Income' }, { value: 'Outcome' }],
+		},
+		{
+			label: 'Category',
+			name: 'category',
+			options: [
+				{ value: 'No category' },
+				{ value: 'Shopping' },
+				{ value: 'Entertainment' },
+				{ value: 'Restaurants and bars' },
+				{ value: 'Health and sports' },
+				{ value: 'Services' },
+				{ value: 'Market' },
+				{ value: 'Transport' },
+				{ value: 'Holidays' },
+			],
+		},
+	]
+
 	return (
 		<div className="relative flex flex-col justify-center w-full gap-4 p-6 bg-white border-2 rounded-2xl font-latoFont border-grey">
 			<form className="flex flex-col gap-2 w-fit" onSubmit={createMovement}>
@@ -105,18 +123,24 @@ const Form = ({ setCall }) => {
 						</div>
 					)
 				)}
-				<div className="flex flex-col gap-2">
-					<label>Type</label>
-					<select
-						className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
-						onChange={refreshState}
-						name="type"
-					>
-						<option value="Income">Income</option>
-						<option value="Outcome">Outcome</option>
-					</select>
-				</div>
-				<div className="flex items-center gap-6 mt-6">
+				{selects.map(({ label, name, options }) => (
+					<div className="flex flex-col gap-2" key={name}>
+						<label>{label}</label>
+						<select
+							className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+							onChange={refreshState}
+							name={name}
+						>
+							{options.map(({ value }) => (
+								<option value={value} key={value}>
+									{value}
+								</option>
+							))}
+						</select>
+					</div>
+				))}
+
+				<div className="flex flex-col items-start lg:flex-row lg:items-center gap-6 mt-6">
 					<button
 						type="submit"
 						className="flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"

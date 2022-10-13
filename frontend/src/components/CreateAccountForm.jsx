@@ -1,40 +1,11 @@
-import { WarningIcon, CheckIcon } from './Design/Icons'
+import { useState } from 'react'
+import { WarningIcon, CheckIcon, EyeIcon, CloseEyeIcon } from './design/Icons'
 
 const CreateAccountForm = props => {
 	// Destructure props
 	const { newUser, refreshState, createNewUser, success, errorMessage, error } =
 		props
-
-	const inputs = [
-		{
-			label: 'Username',
-			type: 'text',
-			min: null,
-			name: 'username',
-			value: newUser.username,
-		},
-		{
-			label: 'Name',
-			type: 'text',
-			min: null,
-			name: 'name',
-			value: newUser.name,
-		},
-		{
-			label: 'Email',
-			type: 'email',
-			min: null,
-			name: 'email',
-			value: newUser.email,
-		},
-		{
-			label: 'Password',
-			type: 'text',
-			min: null,
-			name: 'password',
-			value: newUser.password,
-		},
-	]
+	const [showPassword, setShowPassword] = useState(false)
 
 	return (
 		<div className="relative flex flex-col justify-center gap-4 px-12 py-6 bg-white border-2 shadow-xl rounded-2xl font-latoFont border-grey">
@@ -42,24 +13,62 @@ const CreateAccountForm = props => {
 				Create Account
 			</h1>
 			<form className="flex flex-col gap-4 w-fit" onSubmit={createNewUser}>
-				{inputs.map(input => {
-					const { label, type, min, name, value } = input
-
-					return (
-						<div key={name} className="flex flex-col gap-2 w-fit">
-							<label className="w-full">{label}</label>
-							<input
-								type={type}
-								min={min}
-								className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
-								value={value}
-								onChange={refreshState}
-								name={name}
-							/>
-						</div>
-					)
-				})}
-
+				<div className="flex flex-col gap-2 w-fit">
+					<label>Username *</label>
+					<input
+						className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+						onChange={refreshState}
+						name="username"
+						type="text"
+						value={newUser.username}
+					/>
+				</div>
+				<div className="flex flex-col gap-2 w-fit">
+					<label>Name *</label>
+					<input
+						className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+						onChange={refreshState}
+						name="name"
+						type="text"
+						value={newUser.name}
+					/>
+				</div>
+				<div className="flex flex-col gap-2 w-fit">
+					<label>Email *</label>
+					<input
+						className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+						onChange={refreshState}
+						name="email"
+						type="text"
+						pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+						value={newUser.email}
+						placeholder="email@example.com"
+					/>
+				</div>
+				<div className="relative flex flex-col gap-2 w-fit">
+					<label>Password *</label>
+					<input
+						className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+						onChange={refreshState}
+						name="password"
+						type={showPassword ? 'text' : 'password'}
+						value={newUser.password}
+						minLength={4}
+					/>
+					<button
+						className="absolute bottom-2 right-2"
+						onClick={event => {
+							event.preventDefault()
+							setShowPassword(!showPassword)
+						}}
+					>
+						{!showPassword ? (
+							<EyeIcon classes="w-5 h-5" />
+						) : (
+							<CloseEyeIcon classes="w-5 h-5" />
+						)}
+					</button>
+				</div>
 				{success ? (
 					<p className="flex items-center justify-center gap-1 text-green">
 						<CheckIcon />

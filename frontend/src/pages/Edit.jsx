@@ -7,8 +7,8 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 
 // Icons
-import { WarningIcon, CheckIcon } from '../components/Design/Icons'
-import Background, { BlueCircles } from '../components/Design/Background'
+import { WarningIcon, CheckIcon } from '../components/design/Icons'
+import Background, { BlueCircles } from '../components/design/Background'
 
 const Edit = ({ setCall }) => {
 	// Edit component state
@@ -17,15 +17,14 @@ const Edit = ({ setCall }) => {
 		amount: '',
 		date: '',
 		type: 'Income',
+		category: '',
 	})
 	const [consult, setConsult] = useState(true)
-	// Verify error
 	const [formError, setFormError] = useState(false)
-	// Success message
 	const [success, setSuccess] = useState(false)
 
 	// Get URL params
-	let params = useParams()
+	const params = useParams()
 
 	// Call API
 	useEffect(() => {
@@ -44,16 +43,16 @@ const Edit = ({ setCall }) => {
 	})
 
 	// Form read
-	const refreshState = event => {
+	const refreshState = ({ target }) => {
 		setMovement({
 			...movement,
-			[event.target.name]: event.target.value,
+			[target.name]: target.value,
 		})
 	}
 
 	// Send request to API
-	const editMovement = e => {
-		e.preventDefault()
+	const editMovement = event => {
+		event.preventDefault()
 
 		if (
 			movement.concept === '' ||
@@ -111,13 +110,21 @@ const Edit = ({ setCall }) => {
 			value: movement.type,
 			disabled: true,
 		},
+		{
+			label: 'Category',
+			type: 'text',
+			min: null,
+			name: 'category',
+			value: movement.category,
+			disabled: true,
+		},
 	]
 
 	return (
-		<div className="flex w-full min-h-screen">
+		<div className="flex w-full min-h-screen mb-24 lg:mb-0">
 			<Background />
 			<Sidebar />
-			<div className="flex flex-col w-full gap-10 m-10">
+			<div className="flex flex-col w-full gap-10 p-6 lg:p-16 lg:pt-10">
 				<Header />
 				<h2 className="text-3xl font-bold font-quicksand">Edit movement</h2>
 				<div className="relative flex flex-col justify-center w-full gap-4 p-6 bg-white border-2 rounded-2xl font-latoFont border-grey">

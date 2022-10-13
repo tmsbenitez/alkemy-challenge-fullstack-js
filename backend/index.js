@@ -3,6 +3,10 @@ import router from './routes/index.js'
 import auth from './routes/auth.js'
 import cors from 'cors'
 import db from './database/db.js'
+import dotenv from 'dotenv';
+dotenv.config()
+
+
 
 const app = express()
 

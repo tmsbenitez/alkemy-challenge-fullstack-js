@@ -14,6 +14,9 @@ export const Movement = db.define('movements', {
 	type: {
 		type: Sequelize.STRING,
 	},
+	category: {
+		type: Sequelize.STRING,
+	},
 	userId: {
 		type: Sequelize.BIGINT,
 	},

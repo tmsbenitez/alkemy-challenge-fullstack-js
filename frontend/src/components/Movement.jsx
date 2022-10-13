@@ -9,11 +9,12 @@ import {
 	ArrowsUpDown,
 	ArrowUp,
 	ArrowDown,
-} from './Design/Icons.jsx'
-import { BlueCircles } from './Design/Background.jsx'
+	CategoryIcon
+} from './design/Icons.jsx'
+import { BlueCircles } from './design/Background.jsx'
 
 const Movement = props => {
-	const { id, concept, amount, date, type, setCall } = props
+	const { id, concept, amount, date, type, category, setCall } = props
 
 	return (
 		<div
@@ -34,6 +35,10 @@ const Movement = props => {
 					<p className="flex items-center gap-2 text-md">
 						<ArrowsUpDown />
 						{type}
+					</p>
+					<p className="flex items-center gap-2 text-md">
+						<CategoryIcon />
+						{category}
 					</p>
 				</div>
 				<div className="z-10 flex gap-6 mt-6">

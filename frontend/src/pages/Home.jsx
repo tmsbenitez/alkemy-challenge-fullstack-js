@@ -6,7 +6,7 @@ import Movement from '../components/Movement.jsx'
 import Header from '../components/Header.jsx'
 import Placeholder from '../components/Placeholder.jsx'
 import Budget from '../components/Budget.jsx'
-import Background from '../components/Design/Background.jsx'
+import Background from '../components/design/Background.jsx'
 
 const Home = ({ movements, setCall }) => {
 	// Home State
@@ -44,15 +44,15 @@ const Home = ({ movements, setCall }) => {
 	}, [slicedMovements])
 
 	return (
-		<div className="flex w-full h-full min-h-screen font-latoFont">
+		<div className="flex w-full h-full min-h-screen font-latoFont mb-24 lg:mb-0">
 			<Background />
 			<Sidebar />
-			<main className="flex flex-col w-full gap-10 m-10">
+			<main className="flex flex-col w-full gap-10 p-6 lg:p-16 lg:pt-10">
 				<Header />
 				<div className="flex flex-col gap-4">
 					<Budget budget={budget} />
 					<div>
-						<div className="flex items-center justify-between py-4">
+						<div className="flex flex-col gap-6 lg:flex-row items-center justify-between py-4">
 							<h2 className="text-3xl font-bold font-quicksand">
 								Last 10 movements
 							</h2>
@@ -71,21 +71,24 @@ const Home = ({ movements, setCall }) => {
 								</a>
 							</div>
 						</div>
-						<div className="relative grid gap-8 2xl:grid-cols-2 justify-items-center">
+						<div className="relative flex flex-col 2xl:grid gap-8 2xl:grid-cols-2 justify-items-center">
 							{slicedMovements.length === 0 ? (
 								<Placeholder />
 							) : (
-								slicedMovements.map(({ id, concept, amount, date, type }) => (
-									<Movement
-										key={id}
-										id={id}
-										concept={concept}
-										amount={amount}
-										date={date}
-										type={type}
-										setCall={setCall}
-									/>
-								))
+								slicedMovements.map(
+									({ id, concept, amount, date, type, category }) => (
+										<Movement
+											key={id}
+											id={id}
+											concept={concept}
+											amount={amount}
+											date={date}
+											type={type}
+											category={category}
+											setCall={setCall}
+										/>
+									)
+								)
 							)}
 						</div>
 					</div>

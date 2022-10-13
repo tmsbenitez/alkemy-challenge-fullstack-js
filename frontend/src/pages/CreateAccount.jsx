@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // Components
 import CreateAccountForm from '../components/CreateAccountForm.jsx'
-import Background from '../components/Design/Background.jsx'
+import Background from '../components/design/Background.jsx'
 
 const CreateAccount = () => {
 	// Create Account State
@@ -32,9 +32,10 @@ const CreateAccount = () => {
 		const { username, name, email, password } = newUser
 
 		if (username === '' || name === '' || email === '' || password === '') {
-			setErrorMessage('Please, fill the form.')
+			setErrorMessage('Please, complete the form.')
 			setError(true)
 		} else {
+			setError(false)
 			axiosClient
 				.post('/api/create', newUser)
 				.then(res => {
@@ -49,7 +50,7 @@ const CreateAccount = () => {
 	}
 
 	return (
-		<main className="flex flex-col items-center justify-center h-screen">
+		<main className="flex flex-col items-center justify-center h-screen mb-24 lg:mb-0">
 			<Background />
 			<CreateAccountForm
 				newUser={newUser}

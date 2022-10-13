@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import axiosClient from './config/axios.js'
 
-// Authentication
-
 // Pages
 import Login from './pages/Login.jsx'
 import New from './pages/New.jsx'
@@ -16,23 +14,15 @@ const App = () => {
 	// App State
 	const [movements, setMovements] = useState([])
 	const [call, setCall] = useState(true)
-	const [loggedUser, setLoggedUser] = useState({})
 
 	// Get item from the Local Storage
 	const loggedUserJSON = window.localStorage.getItem('LoggedUser')
 
 	useEffect(() => {
-		if (loggedUserJSON) {
-			const user = JSON.parse(loggedUserJSON)
-			setLoggedUser(user)
-		}
-	}, [loggedUserJSON])
-
-	useEffect(() => {
 		// Call API
 		if (loggedUserJSON && call) {
 			const callAPI = () => {
-				const loggedUser = JSON.parse(window.localStorage.getItem('LoggedUser'))
+				const loggedUser = JSON.parse(loggedUserJSON)
 
 				axiosClient
 					.get('/movements', { params: { loggedUserId: loggedUser.id } })

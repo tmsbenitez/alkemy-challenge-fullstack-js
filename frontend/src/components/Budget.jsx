@@ -1,6 +1,5 @@
-// Icons
-import { WhiteCircles } from './Design/Background.jsx'
-import { BudgetIcon } from './Design/Icons.jsx'
+import { WhiteCircles } from './design/Background.jsx'
+import { BudgetIcon } from './design/Icons.jsx'
 
 const Budget = ({ budget }) => {
 	return (

@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import UserInfo from './UserInfo.jsx'
 
 // Icons
-import { UserIcon } from './Design/Icons.jsx'
+import { UserIcon } from './design/Icons.jsx'
 
 const Header = () => {
 	const [userToggle, setUserToggle] = useState(false)
@@ -13,6 +13,7 @@ const Header = () => {
 	const loggedUser = JSON.parse(window.localStorage.getItem('LoggedUser'))
 
 	const logout = () => {
+		// Clear local storage and redirect to '/'
 		window.localStorage.clear()
 		window.location.href = '/'
 	}
