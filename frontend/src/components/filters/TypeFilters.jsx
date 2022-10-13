@@ -1,5 +1,5 @@
 const TypeFilters = ({ filter, setFilter }) => {
-	const options = [{ value: 'All' }, { value: 'Income' }, { value: 'Outcome' }]
+	const options = [{ value: 'All' }, { value: 'Income' }, { value: 'Egress' }]
 
 	const handleChange = ({ target }) => {
 		target.value === 'All'

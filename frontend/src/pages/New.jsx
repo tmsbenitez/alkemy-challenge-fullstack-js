@@ -2,6 +2,8 @@
 import Form from '../components/Form'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
+
+// Background
 import Background from '../components/design/Background'
 
 const New = ({ setCall }) => {

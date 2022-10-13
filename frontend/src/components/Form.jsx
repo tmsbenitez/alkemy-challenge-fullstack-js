@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import axiosClient from '../config/axios.js'
 
-import { BlueCircles } from './design/Background.jsx'
+// Icons
 import { CheckIcon, PlusIcon, WarningIcon } from './design/Icons.jsx'
 
+// Background
+import { BlueCircles } from './design/Background.jsx'
+
 const Form = ({ setCall }) => {
-	// User from the Local Storage
+	// Get user from the Local Storage
 	const { id, token } = JSON.parse(window.localStorage.getItem('LoggedUser'))
 
 	const [movement, setMovement] = useState({
@@ -33,12 +36,13 @@ const Form = ({ setCall }) => {
 		const { concept, amount, date } = movement
 
 		if (concept === '' || amount === '' || date === '') {
-			setFormError(true)
+			setFormError(false)
+			setTimeout(() => setFormError(true), 100)
 			return
 		} else {
 			setFormError(false)
-			setSuccess(true)
-			setTimeout(() => setSuccess(false), 5000)
+			setSuccess(false)
+			setTimeout(() => setSuccess(true), 100)
 			axiosClient
 				.post('/movements', movement, {
 					headers: { Authorization: 'Bearer ' + token },
@@ -83,7 +87,7 @@ const Form = ({ setCall }) => {
 		{
 			label: 'Type',
 			name: 'type',
-			options: [{ value: 'Income' }, { value: 'Outcome' }],
+			options: [{ value: 'Income' }, { value: 'Egress' }],
 		},
 		{
 			label: 'Category',

@@ -1,4 +1,7 @@
+// Icons
 import { PlusIcon } from './design/Icons.jsx'
+
+// Background
 import { BlueCircles } from './design/Background.jsx'
 
 const Placeholder = () => {

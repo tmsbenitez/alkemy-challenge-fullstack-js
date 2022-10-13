@@ -2,6 +2,48 @@
 
 # CHALLENGE FULL STACK - JavaScript 🚀
 
+## ¿Cómo instalar y correr la aplicación?
+
+1. Coloca en tu consola:
+
+`git clone https://github.com/tmsbenitez/alkemy-challenge-fullstack-js.git`
+
+2. Abrimos el directorio donde se haya descargado:
+
+`cd alkemy-challenge-fullstack-js`
+
+3. Abrimos el directorio frontend:
+
+`cd frontend`
+
+4. Instalamos todas las dependencias:
+
+`npm install`
+
+5. Volvemos al directorio inicial donde se descargó nuestro archivo, abrimos el directorio backend y repetimos el paso 4:
+
+`cd backend`
+
+`npm install`
+
+### Con esto ya tendríamos la aplicación descargada y lista para iniciarse, lo siguiente es:
+
+1. Abrir una consola en el directorio frontend y otra en el directorio backend y luego iniciar la aplicación con sus respectivos comandos:
+
+En la primer consola: 
+
+`cd frontend`
+
+`npm start`
+
+En la segunda consola: 
+
+`cd backend`
+
+`npm run dev`
+
+### Nuestra aplicación debería iniciarse sin problemas y lista para usarse.
+
 ## Objetivo
 
 Desarrollar una aplicación para administración de presupuesto personal. La misma debe

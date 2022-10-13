@@ -6,10 +6,11 @@ import Movement from '../components/Movement.jsx'
 import Header from '../components/Header.jsx'
 import Placeholder from '../components/Placeholder.jsx'
 import Budget from '../components/Budget.jsx'
+
+// Background
 import Background from '../components/design/Background.jsx'
 
 const Home = ({ movements, setCall }) => {
-	// Home State
 	const [budget, setBudget] = useState(0)
 	const [slicedMovements, setSlicedMovements] = useState([])
 

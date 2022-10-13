@@ -1,8 +1,9 @@
 import { useState } from 'react'
+
+// Icons
 import { WarningIcon, CheckIcon, EyeIcon, CloseEyeIcon } from './design/Icons'
 
 const CreateAccountForm = props => {
-	// Destructure props
 	const { newUser, refreshState, createNewUser, success, errorMessage, error } =
 		props
 	const [showPassword, setShowPassword] = useState(false)

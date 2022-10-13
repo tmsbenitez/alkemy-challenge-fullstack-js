@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+
+// Icons
 import { EyeIcon, CloseEyeIcon, WarningIcon } from './design/Icons'
 
 const LoginForm = ({ validateUser, refreshState, user, errorMessage }) => {
-	// LoginForm State
 	const [error, setError] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
 

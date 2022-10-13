@@ -8,10 +8,11 @@ import Header from '../components/Header'
 
 // Icons
 import { WarningIcon, CheckIcon } from '../components/design/Icons'
+
+// Background
 import Background, { BlueCircles } from '../components/design/Background'
 
 const Edit = ({ setCall }) => {
-	// Edit component state
 	const [movement, setMovement] = useState({
 		concept: '',
 		amount: '',
@@ -64,8 +65,8 @@ const Edit = ({ setCall }) => {
 			return
 		} else {
 			setFormError(false)
-			setSuccess(true)
-			setTimeout(() => setSuccess(false), 5000)
+			setSuccess(false)
+			setTimeout(() => setSuccess(true), 100)
 			axiosClient
 				.put(`/movements/${movement.id}`, movement)
 				.then(res => setCall(true))

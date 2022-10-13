@@ -1,13 +1,15 @@
 import { useState, useMemo } from 'react'
 
 // Components
-import Background from '../components/design/Background.jsx'
 import Header from '../components/Header.jsx'
 import Sidebar from '../components/Sidebar.jsx'
 import Placeholder from '../components/Placeholder.jsx'
 import Movement from '../components/Movement.jsx'
 import TypeFilters from '../components/filters/TypeFilters.jsx'
 import CategoryFilters from '../components/filters/CategoryFilters.jsx'
+
+// Background
+import Background from '../components/design/Background.jsx'
 
 const Movements = ({ movements, setCall }) => {
 	const [filter, setFilter] = useState({
@@ -19,7 +21,6 @@ const Movements = ({ movements, setCall }) => {
 		const { type, category } = filter
 
 		let filters = type ? movements.filter(m => m.type === type) : movements
-
 		filters = category ? filters.filter(m => m.category === category) : filters
 
 		return filters

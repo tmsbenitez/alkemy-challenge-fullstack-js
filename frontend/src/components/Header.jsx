@@ -8,15 +8,9 @@ import { UserIcon } from './design/Icons.jsx'
 
 const Header = () => {
 	const [userToggle, setUserToggle] = useState(false)
-	const wrapperRef = useRef(null)
-
 	const loggedUser = JSON.parse(window.localStorage.getItem('LoggedUser'))
-
-	const logout = () => {
-		// Clear local storage and redirect to '/'
-		window.localStorage.clear()
-		window.location.href = '/'
-	}
+	// Hide the component when click away
+	const wrapperRef = useRef(null)
 
 	const clickAwayListener = ref => {
 		const handleClickAway = event => {
@@ -29,6 +23,12 @@ const Header = () => {
 	}
 
 	clickAwayListener(wrapperRef)
+
+	const logout = () => {
+		// Clear local storage and redirect to '/'
+		window.localStorage.clear()
+		window.location.href = '/'
+	}
 
 	return (
 		<header className="flex items-center justify-between w-full px-6 py-2 bg-white border-2 border-grey rounded-2xl">

@@ -1,13 +1,13 @@
-import axiosClient from '../config/axios.js'
 import { useState } from 'react'
-
+import axiosClient from '../config/axios.js'
 
 // Components
-import Background from '../components/design/Background.jsx'
 import LoginForm from '../components/LoginForm.jsx'
 
+// Background
+import Background from '../components/design/Background.jsx'
+
 const Login = () => {
-	// Login State
 	const [user, setUser] = useState({
 		email: '',
 		password: '',

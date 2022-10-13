@@ -1,12 +1,13 @@
-import axiosClient from '../config/axios.js'
 import { useState } from 'react'
+import axiosClient from '../config/axios.js'
 
 // Components
 import CreateAccountForm from '../components/CreateAccountForm.jsx'
+
+// Background
 import Background from '../components/design/Background.jsx'
 
 const CreateAccount = () => {
-	// Create Account State
 	const [newUser, setNewUser] = useState({
 		username: '',
 		name: '',
