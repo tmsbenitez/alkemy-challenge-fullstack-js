@@ -44,14 +44,44 @@ const App = () => {
 			/>
 			<Route
 				path="/home"
-				element={<Home movements={movements} setCall={setCall} />}
+				element={
+					!loggedUserJSON ? (
+						<Navigate replace to="/" />
+					) : (
+						<Home movements={movements} setCall={setCall} />
+					)
+				}
 			/>
-			<Route path="/new" element={<New setCall={setCall} />} />
+			<Route
+				path="/new"
+				element={
+					!loggedUserJSON ? (
+						<Navigate replace to="/" />
+					) : (
+						<New setCall={setCall} />
+					)
+				}
+			/>
 			<Route
 				path="/movements"
-				element={<Movements setCall={setCall} movements={movements} />}
+				element={
+					!loggedUserJSON ? (
+						<Navigate replace to="/" />
+					) : (
+						<Movements setCall={setCall} movements={movements} />
+					)
+				}
 			/>
-			<Route path="/movements/:id" element={<Edit setCall={setCall} />} />
+			<Route
+				path="/movements/:id"
+				element={
+					!loggedUserJSON ? (
+						<Navigate replace to="/" />
+					) : (
+						<Edit setCall={setCall} />
+					)
+				}
+			/>
 			<Route path="/api/create" element={<CreateAccount />} />
 		</Routes>
 	)

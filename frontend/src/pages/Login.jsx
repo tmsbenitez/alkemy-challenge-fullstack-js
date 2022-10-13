@@ -5,7 +5,7 @@ import axiosClient from '../config/axios.js'
 import LoginForm from '../components/LoginForm.jsx'
 
 // Background
-import Background from '../components/design/Background.jsx'
+import Background from '../components/designs/Background.jsx'
 
 const Login = () => {
 	const [user, setUser] = useState({

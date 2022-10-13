@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // Icons
-import { WarningIcon, CheckIcon, EyeIcon, CloseEyeIcon } from './design/Icons'
+import { WarningIcon, CheckIcon, EyeIcon, CloseEyeIcon } from './designs/Icons'
 
 const CreateAccountForm = props => {
 	const { newUser, refreshState, createNewUser, success, errorMessage, error } =

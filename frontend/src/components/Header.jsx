@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import UserInfo from './UserInfo.jsx'
 
 // Icons
-import { UserIcon } from './design/Icons.jsx'
+import { UserIcon } from './designs/Icons.jsx'
 
 const Header = () => {
 	const [userToggle, setUserToggle] = useState(false)

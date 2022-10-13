@@ -8,7 +8,7 @@ import Placeholder from '../components/Placeholder.jsx'
 import Budget from '../components/Budget.jsx'
 
 // Background
-import Background from '../components/design/Background.jsx'
+import Background from '../components/designs/Background.jsx'
 
 const Home = ({ movements, setCall }) => {
 	const [budget, setBudget] = useState(0)
@@ -45,7 +45,7 @@ const Home = ({ movements, setCall }) => {
 	}, [slicedMovements])
 
 	return (
-		<div className="flex w-full h-full min-h-screen font-latoFont mb-24 lg:mb-0">
+		<div className="flex w-full h-full min-h-screen mb-24 font-latoFont lg:mb-0">
 			<Background />
 			<Sidebar />
 			<main className="flex flex-col w-full gap-10 p-6 lg:p-16 lg:pt-10">
@@ -53,7 +53,7 @@ const Home = ({ movements, setCall }) => {
 				<div className="flex flex-col gap-4">
 					<Budget budget={budget} />
 					<div>
-						<div className="flex flex-col gap-6 lg:flex-row items-center justify-between py-4">
+						<div className="flex flex-col items-center justify-between gap-6 py-4 lg:flex-row">
 							<h2 className="text-3xl font-bold font-quicksand">
 								Last 10 movements
 							</h2>
@@ -72,7 +72,7 @@ const Home = ({ movements, setCall }) => {
 								</a>
 							</div>
 						</div>
-						<div className="relative flex flex-col 2xl:grid gap-8 2xl:grid-cols-2 justify-items-center">
+						<div className="relative flex flex-col gap-8 2xl:grid 2xl:grid-cols-2 justify-items-center">
 							{slicedMovements.length === 0 ? (
 								<Placeholder />
 							) : (

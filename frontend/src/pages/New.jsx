@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 
 // Background
-import Background from '../components/design/Background'
+import Background from '../components/designs/Background'
 
 const New = ({ setCall }) => {
 	return (

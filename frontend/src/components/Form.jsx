@@ -2,10 +2,10 @@ import { useState } from 'react'
 import axiosClient from '../config/axios.js'
 
 // Icons
-import { CheckIcon, PlusIcon, WarningIcon } from './design/Icons.jsx'
+import { CheckIcon, PlusIcon, WarningIcon } from './designs/Icons.jsx'
 
 // Background
-import { BlueCircles } from './design/Background.jsx'
+import { BlueCircles } from './designs/Background.jsx'
 
 const Form = ({ setCall }) => {
 	// Get user from the Local Storage
@@ -144,7 +144,7 @@ const Form = ({ setCall }) => {
 					</div>
 				))}
 
-				<div className="flex flex-col items-start lg:flex-row lg:items-center gap-6 mt-6">
+				<div className="flex flex-col items-start gap-6 mt-6 lg:flex-row lg:items-center">
 					<button
 						type="submit"
 						className="flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"

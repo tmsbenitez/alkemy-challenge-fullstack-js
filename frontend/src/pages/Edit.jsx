@@ -7,10 +7,10 @@ import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 
 // Icons
-import { WarningIcon, CheckIcon } from '../components/design/Icons'
+import { WarningIcon, CheckIcon } from '../components/designs/Icons'
 
 // Background
-import Background, { BlueCircles } from '../components/design/Background'
+import Background, { BlueCircles } from '../components/designs/Background'
 
 const Edit = ({ setCall }) => {
 	const [movement, setMovement] = useState({

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import axiosClient from '../config/axios'
 
 // Icons
-import { TrashIcon, CloseIcon } from './design/Icons.jsx'
+import { TrashIcon, CloseIcon } from './designs/Icons.jsx'
 
 const Remove = ({ id, setCall, setConfirmRemove }) => {
 	// Hide the component when click away
@@ -31,12 +31,12 @@ const Remove = ({ id, setCall, setConfirmRemove }) => {
 	return (
 		<div
 			ref={wrapperRef}
-			className="absolute bottom-0 z-50 w-full h-full gap-6 p-10 right-0 flex flex-col justify-center items-center bg-white border-2 border-grey shadow-xl rounded-xl"
+			className="absolute bottom-0 right-0 z-50 flex flex-col items-center justify-center w-full h-full gap-6 p-10 bg-white border-2 shadow-xl border-grey rounded-xl"
 		>
 			<p className="text-lg text-center">
 				Are you sure you want to remove this movement?
 			</p>
-			<div className="flex gap-2 lg:gap-6 flex-col lg:flex-row">
+			<div className="flex flex-col gap-2 lg:gap-6 lg:flex-row">
 				<button
 					onClick={() => setConfirmRemove(false)}
 					className="flex items-center justify-center w-32 gap-1 px-4 py-2 duration-200 border-2 rounded-lg border-grey bg-grey hover:bg-white hover:text-blue-500"
@@ -46,7 +46,7 @@ const Remove = ({ id, setCall, setConfirmRemove }) => {
 				</button>
 				<button
 					onClick={removeMovement}
-					className="flex items-center justify-center w-32 gap-1 px-4 py-2 duration-200 border-2 rounded-lg border-grey bg-red text-white hover:bg-white hover:text-red"
+					className="flex items-center justify-center w-32 gap-1 px-4 py-2 text-white duration-200 border-2 rounded-lg border-grey bg-red hover:bg-white hover:text-red"
 				>
 					<TrashIcon classes="w-4 h-4" />
 					Remove

@@ -5,7 +5,7 @@ import axiosClient from '../config/axios.js'
 import CreateAccountForm from '../components/CreateAccountForm.jsx'
 
 // Background
-import Background from '../components/design/Background.jsx'
+import Background from '../components/designs/Background.jsx'
 
 const CreateAccount = () => {
 	const [newUser, setNewUser] = useState({
