@@ -119,4 +119,4 @@ de Frontend
 * Buenas prácticas para el nombre de rutas
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/tmsbenitez/alkemy-challenge-fullstack-js/blob/main/LICENSE)
