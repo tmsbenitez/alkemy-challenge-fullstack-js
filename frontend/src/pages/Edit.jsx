@@ -137,7 +137,7 @@ const Edit = ({ setCall }) => {
 									<input
 										type={type}
 										min={min}
-										className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+										className="z-10 w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
 										value={value}
 										name={name}
 										disabled={disabled ? 'disabled' : null}
@@ -150,7 +150,7 @@ const Edit = ({ setCall }) => {
 						<div className="flex items-center gap-6 mt-6">
 							<button
 								type="submit"
-								className="flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"
+								className="z-10 flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"
 								value="Edit"
 							>
 								Edit

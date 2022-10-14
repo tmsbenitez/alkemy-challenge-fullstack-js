@@ -118,7 +118,7 @@ const Form = ({ setCall }) => {
 								min={min}
 								max={max}
 								maxLength={maxLength}
-								className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+								className="z-10 w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
 								value={value}
 								onChange={refreshState}
 								name={name}
@@ -131,7 +131,7 @@ const Form = ({ setCall }) => {
 					<div className="flex flex-col gap-2" key={name}>
 						<label>{label}</label>
 						<select
-							className="w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
+							className="z-10 w-64 p-1 duration-200 border-2 rounded-lg outline-none border-grey focus:border-blue-500"
 							onChange={refreshState}
 							name={name}
 						>
@@ -147,7 +147,7 @@ const Form = ({ setCall }) => {
 				<div className="flex flex-col items-start gap-6 mt-6 lg:flex-row lg:items-center">
 					<button
 						type="submit"
-						className="flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"
+						className="z-10 flex items-center justify-center gap-1 px-6 py-1 duration-200 border-2 rounded cursor-pointer border-grey bg-grey hover:bg-white hover:text-blue-500"
 					>
 						<PlusIcon classes="w-5 h-5" />
 						Add
