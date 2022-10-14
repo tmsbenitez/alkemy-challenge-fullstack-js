@@ -117,3 +117,6 @@ de Frontend
 * Correcto diseño de la base de datos
 * Buenas prácticas de GIT: Commits declarativos y atomizados
 * Buenas prácticas para el nombre de rutas
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
