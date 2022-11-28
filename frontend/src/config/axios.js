@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosClient = axios.create({
-	baseURL: 'http://localhost:8000' || 'http://localhost:4000',
+	baseURL: process.env.REACT_APP_BASE_URL || 'https://alkemy-challenge-hxfu.onrender.com',
 })
 
 export default axiosClient
